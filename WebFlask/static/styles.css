@@ -1,0 +1,156 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    line-height: 2;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #77aaff 10px solid;
+}
+
+header h1 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+    color: #77aaff;
+}
+header h2 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+    
+}
+
+article {
+    padding: 20px;
+    background: #fff;
+    margin-top: 20px;
+    border-radius: 5px;
+  
+}
+article h2 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+    color: #333;
+  
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border-bottom: #77aaff 10px solid;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+   
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    
+}
+
+th {
+    background-color: #333;
+    color: #77aaff;
+    border-bottom: #77aaff 3px solid;
+}
+
+.bloque-contenido {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    background: #333;
+    border-bottom: #77aaff 10px solid;
+    
+  
+}
+
+.imagen-izquierda {
+    width: 400px; 
+    height: auto;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.texto-derecha {
+    flex: 1;
+}
+
+.texto-derecha h2 {
+    margin-top: 0;
+    color: #77aaff;
+}
+
+.texto-derecha p {
+    line-height: 2;
+    color: #ffffff; }
+   
+
+.bloque-contenido2 {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 5px;
+        background: ffffff;
+        border-bottom: #77aaff 10px solid;
+      
+    }
+    
+    .imagen-izquierda2 {
+        width: 400px; 
+        height: auto;
+        margin-right: 20px;
+        border-radius: 5px;
+    }
+    
+    .texto-derecha2 {
+        flex: 1;
+    }
+    
+    .texto-derecha2 h2 {
+        margin-top: 0;
+        color: #77aaff;
+    }
+    
+    .texto-derecha2 p {
+        line-height: 2;
+        color: #ffffff; }
+    
+.seccion-informacion ol {
+    list-style-type: decimal; 
+    padding-left: 20px; }    
+
+        
+
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #333;
+    color: #77aaff;
+    margin-top: 20px;
+}
+
