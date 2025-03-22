@@ -11,6 +11,10 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+@app.route('/Nav')
+def NavBar():
+    return render_template('NavBar.html')
+
 @app.route('/MlCasoDeUsoSupervisado')
 def MlCaso():
     return render_template('MlCasoDeUsoSupervisado.html')
