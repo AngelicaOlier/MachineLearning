@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artículo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="styles.css">
+
 </head>
+
 <body>
     <div class="container">
         <img src="{{ url_for('static', filename='images/banner_ml.jpg') }}" alt="ilustración Machine Learning" height="200px"; width="100%">
@@ -45,7 +48,7 @@
                 </tr>
             </table>
             <div class="bloque-contenido">
-                <img src="{{ url_for('static', filename='images/imagen2_data.jpg') }}" alt="Descripción de la imagen" class="imagen-izquierda">
+                <img src="{{ url_for('static', filename='images/imagen2_data.jpg') }}" alt="IMAGEN DATA" class="imagen-izquierda">
                
                 <div class="texto-derecha">
                     <h2>Modelo Supervisado</h2>
@@ -53,7 +56,7 @@
                 </div>  
             </div> 
             <div class="bloque-contenido2">
-                <img src="{{ url_for('static', filename='images/imagen1_aprendizaje.jpg') }}" alt="Descripción de la imagen" class="imagen-izquierda">
+                <img src="{{ url_for('static', filename='images/imagen1_aprendizaje.jpg') }}" alt="IMAGEN APRENDIZAJE MAQUINA" class="imagen-izquierda">
                 <div class="texto-derecha2">
                 <h2>Proceso de Aprendizaje</h2>
                 <ul>
@@ -65,7 +68,7 @@
                 </div>
             </div>
             <div class="bloque-contenido2">
-                <img src="{{ url_for('static', filename='images/imagen4_infografia.jpg') }}" alt="Descripción de la imagen" class="imagen-izquierda">
+                <img src="{{ url_for('static', filename='images/imagen4_infografia.jpg') }}" alt="INFOGRAFIA ML" class="imagen-izquierda">
                 <div class="texto-derecha2">
                 <h2>Ruta para aprender Machine Learning</h2>
                 <ol>
@@ -81,18 +84,53 @@
                 </ol>
                 </div>
             </div>
-            <h2>Referencias </h2>
-            <p>Amazon Web Services, Inc. ( 2024). Centro de conceptos de computación en la nube: ¿Qué es el aprendizaje automático? Obtenido de aws.amazon.com: https://aws.amazon.com/es/what-is/machine-learning/  </p>
-           <p> Acosta Gutiérrez, G. ( 2020). A Comparative Study of NLP and Machine Learning Techniques for Sentiment Analysis and Topic Modeling on Amazon Reviews. INTERNATIONAL JOURNAL OF COMPUTER SCIENCE ENGINEERING </p>
-            <p>IBM. (2024). Topics:¿Qué es el machine learning (ML)? Obtenido de IBM México website: https://www.ibm.com/es-es/topics/machine-learning </p>
             
+            <h2>Implementación del Aprendizaje Supervisado en la Clínica Mayo</h2>
+            <p>La Clínica Mayo ha desarrollado un sistema basado en aprendizaje supervisado para la detección temprana de la disfunción del ventrículo izquierdo, una afección cardíaca grave. Esta iniciativa forma parte de un esfuerzo más amplio para aplicar inteligencia artificial en el diagnóstico y tratamiento de enfermedades cardiovasculares.</p>
             
+            <h3>Objetivos de la Implementación</h3>
+            <ul>
+                <li>Identificar signos tempranos de disfunción del ventrículo izquierdo a partir de electrocardiogramas (ECG), permitiendo diagnósticos más rápidos y precisos.</li>
+                <li>Reducir la necesidad de pruebas invasivas mediante el análisis automatizado de datos clínicos, mejorando la comodidad y seguridad del paciente.</li>
+                <li>Mejorar la precisión del diagnóstico con una tasa de éxito del 93%, reduciendo errores humanos en la interpretación de ECG.</li>
+                <li>Optimizar la toma de decisiones médicas con el apoyo de IA, facilitando el acceso a tratamientos más oportunos y efectivos.</li>
+            </ul>
+            
+            <h3>Desarrollo e Implementación</h3>
+            <p>El desarrollo de este sistema se basó en la colaboración entre médicos cardiólogos y científicos de datos de la Clínica Mayo. A continuación, se describen las principales etapas del proyecto:</p>
+            <ol>
+                <li><strong>Recolección de Datos:</strong> Se recopilaron más de 100,000 electrocardiogramas de pacientes con diagnóstico confirmado de disfunción ventricular izquierda. Estos datos fueron preprocesados para eliminar ruido y mejorar la calidad de las señales.</li>
+                <li><strong>Entrenamiento del Modelo:</strong> Se utilizó un modelo de redes neuronales profundas para aprender patrones en los ECG asociados con la enfermedad. El modelo fue entrenado utilizando técnicas de aprendizaje supervisado, donde se le proporcionaron ejemplos de ECG etiquetados con diagnósticos verificados por especialistas.</li>
+                <li><strong>Evaluación y Validación:</strong> Para asegurar la precisión del modelo, se realizó una validación cruzada con datos no vistos previamente. Los resultados indicaron que el modelo podía detectar la disfunción del ventrículo izquierdo con una precisión del 93%, superando a métodos convencionales de diagnóstico.</li>
+                <li><strong>Implementación Clínica:</strong> El sistema fue integrado en los flujos de trabajo médicos de la Clínica Mayo, proporcionando a los especialistas una herramienta complementaria para el diagnóstico temprano de la enfermedad.</li>
+                <li><strong>Monitoreo y Mejoras:</strong> Se estableció un proceso de mejora continua, donde el modelo se actualiza periódicamente con nuevos datos para mejorar su precisión y adaptabilidad a diferentes poblaciones de pacientes.</li>
+            </ol>
+            
+            <h3>Impacto y Beneficios</h3>
+            <p>El uso de inteligencia artificial en la detección de enfermedades cardíacas ha permitido:</p>
+            <ul>
+                <li><strong>Diagnósticos más rápidos:</strong> La automatización del análisis de ECG ha reducido el tiempo necesario para identificar la disfunción del ventrículo izquierdo.</li>
+                <li><strong>Reducción de costos médicos:</strong> Menos pruebas invasivas significan un menor costo para los pacientes y los sistemas de salud.</li>
+                <li><strong>Mayor precisión diagnóstica:</strong> La IA ha demostrado ser más efectiva que los métodos tradicionales en la detección temprana de esta afección.</li>
+                <li><strong>Mejor tratamiento:</strong> Un diagnóstico temprano permite iniciar tratamientos antes de que la enfermedad progrese, mejorando las tasas de supervivencia y calidad de vida de los pacientes.</li>
+            </ul>
+            
+            <h3>Desafíos y Futuro</h3>
+            <p>A pesar de su éxito, la implementación de IA en medicina enfrenta desafíos como la aceptación por parte de los profesionales de la salud, la necesidad de explicabilidad de los modelos de IA y la integración con otros sistemas de salud electrónicos. Sin embargo, la Clínica Mayo continúa investigando nuevas aplicaciones de IA en cardiología, explorando su uso en la predicción de otros trastornos cardíacos y el desarrollo de herramientas personalizadas para pacientes.</p>
+        
+
+            <h2>Referencias</h2>
+            
+            <p>Amazon Web Services, Inc. ( 2024). Centro de conceptos de computación en la nube: ¿Qué es el aprendizaje automático? Obtenido de aws.amazon.com:<a href= https://aws.amazon.com/es/what-is/machine-learning>https://aws.amazon.com/es/what-is/machine-learning/</a></p>
+            <p> Acosta Gutiérrez, G. ( 2020). A Comparative Study of NLP and Machine Learning Techniques for Sentiment Analysis and Topic Modeling on Amazon Reviews. INTERNATIONAL JOURNAL OF COMPUTER SCIENCE ENGINEERING </p>
+            <p>IBM. (2024). Topics:¿Qué es el machine learning (ML)? Obtenido de IBM México website: <a href=https://www.ibm.com/es-es/topics/machine-learning>https://www.ibm.com/es-es/topics/machine-learning</a></p>
+            <p>Mayo Clinic. (2024). <i>Artificial Intelligence in Cardiology</i>. Obtenido de : <a href="https://www.mayoclinic.org/es/departments-centers/ai-cardiology/overview/ovc-20486648">https://www.mayoclinic.org/es/departments-centers/ai-cardiology/overview/ovc-20486648</a></p>
         </article>
-       
-                
+
         <footer>
-            <p><strong>Universidad de Cundinamarca</strong> </p>
-            <p><strong>Ingeniería de Sistemas y Computación</strong> </p>
+            <p><strong>Universidad de Cundinamarca</strong></p>
+            <p><strong>Ingeniería de Sistemas y Computación</strong></p>
+            
         </footer>
     </div>
 </body>

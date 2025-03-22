@@ -3,96 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artículo</title>
+    <title>Casos de Uso en Machine Learning</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <img src="{{ url_for('static', filename='images/banner_ml.jpg') }}" alt="ilustración Machine Learning" height="200px"; width="100%">
+        <img src="{{ url_for('static', filename='images/banner_ml.jpg') }}" alt="ilustración Machine Learning" height="200px" width="100%">
         <header>
-            <h1>MACHINE LEARNING</h1>
-            <h2>ANGELICA OLIER Y JOHAN MARTINEZ</h2>
+            <h1>CASOS DE USO EN MACHINE LEARNING</h1>
+            <h2>Clínica Mayo y la IA en Cardiología</h2>
         </header>
-        <article>
-            <h2>¿Qué es el Machine Learning?</h2>
-            <p>El Machine Learning es una disciplina del campo de la Inteligencia Artificial que, a través de algoritmos, dota a las máquinas de la capacidad de identificar patrones en datos masivos y elaborar predicciones (análisis predictivo). Este aprendizaje permite a los computadores realizar tareas específicas de forma autónoma, es decir, sin necesidad de ser programados.</p>
-            <p>El término se utilizó por primera vez en 1959. Sin embargo, ha ganado relevancia en los últimos años debido al aumento de la capacidad de computación y al boom de los datos. Las técnicas de aprendizaje automático son, de hecho, una parte fundamental del Big Data.</p>
-            <table>
-                <tr>
-                    <th>Modelo</th>
-                    <th>¿Cómo funciona?</th>
-                    <th>¿Qué aplicaciones tiene?</th>
-                </tr>
-                <tr>
-                    <td><strong>Supervisado</strong></td>
-                    <td>Se entrena con datos etiquetados, donde el modelo aprende a mapear entradas a salidas correctas.</td>
-                    <td>Clasificación: Diagnóstico médico (enfermo/no enfermo), detección de spam.<br>Regresión: Predicción de precios de viviendas, estimación de ventas futuras.</td>
-                </tr>
-                <tr>
-                    <td><strong>No Supervisado</strong></td>
-                    <td>Se entrena con datos no etiquetados, buscando patrones y estructuras ocultas.</td>
-                    <td>Clustering: Segmentación de clientes, agrupación de documentos similares.<br>Reducción de Dimensionalidad: Compresión de imágenes, análisis exploratorio de datos.</td>
-                </tr>
-                <tr>
-                    <td><strong>SemiSupervisado</strong></td>
-                    <td>Combina una pequeña cantidad de datos etiquetados con una gran cantidad de datos no etiquetados para mejorar el aprendizaje.</td>
-                    <td>Clasificación: Reconocimiento de imágenes con pocas etiquetas, análisis de sentimientos.<br>Generación de Datos: Mejora de modelos de traducción automática.</td>
-                </tr>
-                <tr>
-                    <td><strong>Recomendación</strong></td>
-                    <td>Utilizan datos de usuarios y productos para sugerir elementos que podrían interesar al usuario.</td>
-                    <td>Filtrado Colaborativo: Recomendaciones de películas en plataformas de streaming, sugerencias de productos en tiendas en línea.<br>Filtrado Basado en Contenido: Recomendación de artículos en blogs, sugerencias de música.</td>
-                </tr>
-            </table>
-            <div class="bloque-contenido">
-                <img src="{{ url_for('static', filename='images/imagen2_data.jpg') }}" alt="Descripción de la imagen" class="imagen-izquierda">
-               
-                <div class="texto-derecha">
-                    <h2>Modelo Supervisado</h2>
-                    <p>Es una técnica de inteligencia artificial donde un modelo aprende a partir de ejemplos. Se le proporciona un conjunto de datos con entradas y salidas correctas (etiquetas). El modelo utiliza estos ejemplos para aprender a hacer predicciones o tomar decisiones cuando se le presentan nuevos datos. Por ejemplo, un profesor que enseña a los niños a reconocer diferentes tipos de frutas. Les muestra muchas imágenes de frutas y les dice cuál es cada una: manzana, naranja, mandarina, etc. Con el tiempo, los niños aprenden a identificar las frutas basándose en las características que han visto.</p>
-                </div>  
-            </div> 
-            <div class="bloque-contenido2">
-                <img src="{{ url_for('static', filename='images/imagen1_aprendizaje.jpg') }}" alt="Descripción de la imagen" class="imagen-izquierda">
-                <div class="texto-derecha2">
-                <h2>Proceso de Aprendizaje</h2>
-                <ul>
-                    <li><strong>Recolección de Datos:</strong> Se recopilan datos relevantes y se etiquetan con las respuestas correctas.</li>
-                    <li><strong>Entrenamiento del Modelo:</strong> El modelo se entrena utilizando estos datos etiquetados, ajustando sus parámetros internos para minimizar los errores en las predicciones.</li>
-                    <li><strong>Evaluación:</strong> Se prueba el modelo con un conjunto de datos diferente (datos de prueba) para evaluar su precisión y capacidad de generalización.</li>
-                    <li><strong>Predicción:</strong> Una vez entrenado y evaluado, el modelo puede hacer predicciones sobre nuevos datos no vistos anteriormente.</li>
-                </ul>
-                </div>
-            </div>
-            <div class="bloque-contenido2">
-                <img src="{{ url_for('static', filename='images/imagen4_infografia.jpg') }}" alt="Descripción de la imagen" class="imagen-izquierda">
-                <div class="texto-derecha2">
-                <h2>Ruta para aprender Machine Learning</h2>
-                <ol>
-                    <li><strong>Matemáticas:</strong> Son la base de Machine Learning, ya que los modelos utilizan cálculos estadísticos para aprender patrones en los datos.</li>
-                    <li><strong>Programación:</strong> Para implementar algoritmos y manejar datos, necesitas un lenguaje de programación que facilite la manipulación y análisis de datos</li>
-                    <li><strong>Bases de Datos:</strong> Los datos son clave, es necesario aprender a almacenarlos, acceder a ellos y gestionarlos eficientemente.</li>
-                    <li><strong>Aprendizaje Automático:</strong>es el núcleo de Machine Learning, donde se implementan modelos para hacer predicciones y tomar decisiones.</li>
-                    <li><strong>Bibliotecas:</strong>Las bibliotecas hacen más fácil la implementación de algoritmos sin necesidad de programarlos desde cero.</li>
-                    <li><strong>Algoritmos:</strong>Cada problema en Machine Learning requiere un algoritmo específico para resolverlo.</li>
-                    <li><strong>Deep Learning:</strong>El Deep Learning lleva el Machine Learning a otro nivel, permitiendo modelos más avanzados como reconocimiento facial y asistentes virtuales.</li>
-                    <li><strong>Herramientas de Visualización de Datos:</strong>La visualización de datos permite entender mejor la información y explicar los resultados a otros.</li>
-                    <li><strong>ML Ingenieria:</strong>Es el objetivo final para alguien que quiere aplicar Machine Learning en el mundo real, creando soluciones inteligentes para empresas y proyectos.</li>
-                </ol>
-                </div>
-            </div>
-            <h2>Referencias </h2>
-            <p>Amazon Web Services, Inc. ( 2024). Centro de conceptos de computación en la nube: ¿Qué es el aprendizaje automático? Obtenido de aws.amazon.com: https://aws.amazon.com/es/what-is/machine-learning/  </p>
-           <p> Acosta Gutiérrez, G. ( 2020). A Comparative Study of NLP and Machine Learning Techniques for Sentiment Analysis and Topic Modeling on Amazon Reviews. INTERNATIONAL JOURNAL OF COMPUTER SCIENCE ENGINEERING </p>
-            <p>IBM. (2024). Topics:¿Qué es el machine learning (ML)? Obtenido de IBM México website: https://www.ibm.com/es-es/topics/machine-learning </p>
+        <article> 
+            <h2>Implementación del Aprendizaje Supervisado en la Clínica Mayo</h2>
+            <p>La Clínica Mayo ha desarrollado un sistema basado en aprendizaje supervisado para la detección temprana de la disfunción del ventrículo izquierdo, una afección cardíaca grave. Esta iniciativa forma parte de un esfuerzo más amplio para aplicar inteligencia artificial en el diagnóstico y tratamiento de enfermedades cardiovasculares.</p>
             
+            <h3>Objetivos de la Implementación</h3>
+            <ul>
+                <li>Identificar signos tempranos de disfunción del ventrículo izquierdo a partir de electrocardiogramas (ECG), permitiendo diagnósticos más rápidos y precisos.</li>
+                <li>Reducir la necesidad de pruebas invasivas mediante el análisis automatizado de datos clínicos, mejorando la comodidad y seguridad del paciente.</li>
+                <li>Mejorar la precisión del diagnóstico con una tasa de éxito del 93%, reduciendo errores humanos en la interpretación de ECG.</li>
+                <li>Optimizar la toma de decisiones médicas con el apoyo de IA, facilitando el acceso a tratamientos más oportunos y efectivos.</li>
+            </ul>
+            
+            <h3>Desarrollo e Implementación</h3>
+            <p>El desarrollo de este sistema se basó en la colaboración entre médicos cardiólogos y científicos de datos de la Clínica Mayo. A continuación, se describen las principales etapas del proyecto:</p>
+            <ol>
+                <li><strong>Recolección de Datos:</strong> Se recopilaron más de 100,000 electrocardiogramas de pacientes con diagnóstico confirmado de disfunción ventricular izquierda. Estos datos fueron preprocesados para eliminar ruido y mejorar la calidad de las señales.</li>
+                <li><strong>Entrenamiento del Modelo:</strong> Se utilizó un modelo de redes neuronales profundas para aprender patrones en los ECG asociados con la enfermedad. El modelo fue entrenado utilizando técnicas de aprendizaje supervisado, donde se le proporcionaron ejemplos de ECG etiquetados con diagnósticos verificados por especialistas.</li>
+                <li><strong>Evaluación y Validación:</strong> Para asegurar la precisión del modelo, se realizó una validación cruzada con datos no vistos previamente. Los resultados indicaron que el modelo podía detectar la disfunción del ventrículo izquierdo con una precisión del 93%, superando a métodos convencionales de diagnóstico.</li>
+                <li><strong>Implementación Clínica:</strong> El sistema fue integrado en los flujos de trabajo médicos de la Clínica Mayo, proporcionando a los especialistas una herramienta complementaria para el diagnóstico temprano de la enfermedad.</li>
+                <li><strong>Monitoreo y Mejoras:</strong> Se estableció un proceso de mejora continua, donde el modelo se actualiza periódicamente con nuevos datos para mejorar su precisión y adaptabilidad a diferentes poblaciones de pacientes.</li>
+            </ol>
+            
+            <h3>Impacto y Beneficios</h3>
+            <p>El uso de inteligencia artificial en la detección de enfermedades cardíacas ha permitido:</p>
+            <ul>
+                <li><strong>Diagnósticos más rápidos:</strong> La automatización del análisis de ECG ha reducido el tiempo necesario para identificar la disfunción del ventrículo izquierdo.</li>
+                <li><strong>Reducción de costos médicos:</strong> Menos pruebas invasivas significan un menor costo para los pacientes y los sistemas de salud.</li>
+                <li><strong>Mayor precisión diagnóstica:</strong> La IA ha demostrado ser más efectiva que los métodos tradicionales en la detección temprana de esta afección.</li>
+                <li><strong>Mejor tratamiento:</strong> Un diagnóstico temprano permite iniciar tratamientos antes de que la enfermedad progrese, mejorando las tasas de supervivencia y calidad de vida de los pacientes.</li>
+            </ul>
+            
+            <h3>Desafíos y Futuro</h3>
+            <p>A pesar de su éxito, la implementación de IA en medicina enfrenta desafíos como la aceptación por parte de los profesionales de la salud, la necesidad de explicabilidad de los modelos de IA y la integración con otros sistemas de salud electrónicos. Sin embargo, la Clínica Mayo continúa investigando nuevas aplicaciones de IA en cardiología, explorando su uso en la predicción de otros trastornos cardíacos y el desarrollo de herramientas personalizadas para pacientes.</p>
+            <div class="container">
+            <h2>Referencias</h2>
+            <p>Mayo Clinic. (2024). <i>Artificial Intelligence in Cardiology</i>. Recuperado de: <a href="https://www.mayoclinic.org/es/departments-centers/ai-cardiology/overview/ovc-20486648">https://www.mayoclinic.org/es/departments-centers/ai-cardiology/overview/ovc-20486648</a></p>
             
         </article>
-       
-                
         <footer>
-            <p><strong>Universidad de Cundinamarca</strong> </p>
-            <p><strong>Ingeniería de Sistemas y Computación</strong> </p>
+            <p><strong>Universidad de Cundinamarca</strong></p>
+            <p><strong>Ingeniería de Sistemas y Computación</strong></p>
         </footer>
     </div>
 </body>
