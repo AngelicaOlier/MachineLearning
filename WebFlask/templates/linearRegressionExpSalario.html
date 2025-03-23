@@ -1,3 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Regresion Linear Exp VS Salario{% endblock %}
+
+{% block content %}
+<div>
+    <header class="text-center bg-primary text-white p-4 shadow-lg">
+        <h1 class="fw-bold">Regresión Lineal</h1>
+        <h2 class="fs-4">Predecir el salario en función de la experiencia</h2>
+    </header>
+    
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card shadow-lg p-4 rounded-3" style="max-width: 500px; width: 100%;">
+            <div class="card-body">
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="Experiencia" class="form-label fw-bold">Experiencia</label>
+                        <div class="input-group">
+                            <input type="number" name="Experiencia" class="form-control" required min="0" step="0.1"
+                                placeholder="Ingrese la experiencia en años">
+                            <button type="submit" class="btn btn-primary">Predecir</button>
+                        </div>
+                    </div>
+                </form>
+    
+                {% if result is not none %}
+                <div class="alert alert-success text-center mt-3 fw-bold">
+                    Salario predicho: <span class="fs-4">{{ result }} USD</span>
+                </div>
+                {% endif %}
+    
+                {% if graph %}
+                <div class="text-center mt-4">
+                    <h5>Gráfico de Regresión Lineal</h5>
+                    <img src="data:image/png;base64,{{ graph }}" class="img-fluid mt-3" alt="Gráfico de regresión lineal">
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,3 +85,4 @@
     </div>
 </body>
 </html>
+-->

@@ -7,20 +7,16 @@ import RL_SalarioExperiencia
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route("/")
 def home():
-    return render_template('index.html')
+    return render_template("index.html")
 
-@app.route('/Nav')
-def NavBar():
-    return render_template('NavBar.html')
+if __name__ == '__main__':
+    app.run(debug=True)
 
 @app.route('/MlCasoDeUsoSupervisado')
 def MlCaso():
     return render_template('MlCasoDeUsoSupervisado.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 @app.route("/linearRegressionExpSalario", methods=["GET", "POST"])
 def linear_regression_Exp_Salario():
@@ -37,3 +33,7 @@ def linear_regression_Exp_Salario():
     return render_template("linearRegressionExpSalario.html",
                            result=predicted_result,
                            graph=graph_image)
+    
+@app.route('/mapa')
+def map():
+    return render_template('mapa.html')
