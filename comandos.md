@@ -1,4 +1,4 @@
-comentarios git 
+```comentarios git 
 Creacion de ramas: git checkout -b "nombreRama" (sin comillas, se crea desde main)
 Feature/rama-caso-de-uso
 
@@ -19,3 +19,4 @@ git status // muestra cambios en el repo
 git add // todos los cambios los selecciona y los daja listos
 
 git commit -m "comentario"
+```
