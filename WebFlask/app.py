@@ -37,3 +37,26 @@ def linear_regression_Exp_Salario():
 @app.route('/mapa')
 def map():
     return render_template('mapa.html')
+
+#SEMANA 7
+@app.route("/RL")
+def rl():
+    return render_template("S7/RegresionLogistica.html")
+@app.route("/KNN")
+def knn():
+    return render_template("S7/KNN.html")
+@app.route("/Arbol")
+def arbol():
+    return render_template("S7/ArbolesDecision.html")
+@app.route("/RF")
+def rf():
+    return render_template("S7/RandomForest.html")
+@app.route("/SVM")
+def svm():
+    return render_template("S7/SVM.html")
+@app.route("/GB")
+def gb():
+    return render_template("S7/GradientBoosting.html")
+@app.route("/NB")
+def nb():
+    return render_template("S7/NaiveBayes.html")

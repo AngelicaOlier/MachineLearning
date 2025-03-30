@@ -35,13 +35,16 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
+                  Modelos ML
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('rl') }}">Regresión Logistica</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('knn') }}">K-Nearest Neighbors (KNN)</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('arbol') }}">Árboles de Decisión</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('rf') }}">Random Forest</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('svm') }}">Support Vector Machine (SVM)</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('gb') }}">Gradient Boosting</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('nb') }}">Naive Bayes</a></li>
                 </ul>
               </li>
               <li class="nav-item">
