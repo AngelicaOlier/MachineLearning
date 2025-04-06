@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Regresión Logística - Predicción de Fallo{% endblock %}
+
+{% block content %}
+<div>
+    <header class="text-center bg-danger text-white p-4 shadow-lg">
+        <h1 class="fw-bold">Regresión Logística</h1>
+        <h2 class="fs-4">Predicción de Fallo en Componentes Automotrices</h2>
+    </header>
+    
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card shadow-lg p-4 rounded-3" style="max-width: 500px; width: 100%;">
+            <div class="card-body">
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="kilometraje" class="form-label fw-bold">Kilometraje</label>
+                        <input type="number" name="kilometraje" class="form-control" required min="0" step="0.1"
+                            placeholder="Ingrese el kilometraje">
+                    </div>
+                    <div class="mb-3">
+                        <label for="temperatura_motor" class="form-label fw-bold">Temperatura del Motor</label>
+                        <input type="number" name="temperatura_motor" class="form-control" required min="0" step="0.1"
+                            placeholder="Ingrese la temperatura en °C">
+                    </div>
+                    <div class="mb-3">
+                        <label for="mantenimiento" class="form-label fw-bold">Mantenimiento Reciente</label>
+                        <select name="mantenimiento" class="form-control" required>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="componente" class="form-label fw-bold">Componente</label>
+                        <select name="componente" class="form-control" required>
+                            <option value="motor">Motor</option>
+                            <option value="transmision">Transmisión</option>
+                            <option value="frenos">Frenos</option>
+                            <option value="suspension">Suspensión</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-danger w-100">Predecir</button>
+                </form>
+    
+                {% if result is not none %}
+                <div class="alert {% if 'riesgo' in result %}alert-success{% else %}alert-danger{% endif %} text-center mt-3 fw-bold">
+                    Predicción: <span class="fs-4">{{ result }}</span>
+                </div>
+                {% endif %}
+    
+                {% if probability is not none %}
+                <div class="alert alert-warning text-center mt-3 fw-bold">
+                    Probabilidad de fallo: <span class="fs-4">{{ probability }}%</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
