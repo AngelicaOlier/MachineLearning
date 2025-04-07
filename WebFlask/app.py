@@ -1,13 +1,14 @@
 #pip install -r requirements.txt
 #flask --app app run --debug
-import os
-from flask import Flask, render_template, request, Response # se añade Response para las imagenes
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from sqlalchemy import text, create_engine
-from sqlalchemy.orm import Session
+
+from flask import render_template, request, Response # se añade Response para las imagenes
+from sqlalchemy import text
 from conexionDB import app,session,db
 import RL_SalarioExperiencia
+import RLg_SectorAutomotriz
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 #------------------------------------------
 @app.route("/conexion_mysql")
@@ -77,6 +78,30 @@ def linear_regression_Exp_Salario():
 @app.route('/mapa')
 def map():
     return render_template('mapa.html')
+
+
+@app.route("/logisticRegressionFallo", methods=["GET", "POST"])
+def logistic_regression_fallo():
+    predicted_result = None
+    probability = None
+    
+    if request.method == "POST":
+        try:
+            kilometraje = float(request.form.get("kilometraje"))
+            temperatura_motor = float(request.form.get("temperatura_motor"))
+            mantenimiento = int(request.form.get("mantenimiento"))
+            componente = request.form.get("componente")
+            
+            predicted_result, probability = RLg_SectorAutomotriz.predict_failure(kilometraje, temperatura_motor, mantenimiento, componente)
+        except ValueError:
+            predicted_result = "Entrada no válida"
+
+    return render_template("logisticRegressionFallo.html",
+                           result=predicted_result,
+                           probability=probability)
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 #SEMANA 7
 # --- FUNCIÓN AUXILIAR ---
