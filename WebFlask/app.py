@@ -1,18 +1,58 @@
 #pip install -r requirements.txt
 #flask --app app run --debug
-import re
-from datetime import datetime
-from flask import Flask, render_template, request
+import os
+from flask import Flask, render_template, request, Response # se añade Response para las imagenes
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from sqlalchemy import text, create_engine
+from sqlalchemy.orm import Session
+from conexionDB import app,session,db
 import RL_SalarioExperiencia
 
-app = Flask(__name__)
+#------------------------------------------
+@app.route("/conexion_mysql")
+def conexion_mysql_prueba():
+    try:
+        session.execute(text("SELECT 1"))
+        print ("conectado")
+    except Exception as e:
+        print (f"Error de conexión: {e}")
+    return "Prueba de conexión a MySQL"
+#------------------------------------------
+
+# --- DEFINICIÓN DE MODELOS SQLAlchemy ---
+class TipoModelo(db.Model):
+    __tablename__ = 'tipomodelo'
+    id_tipomodelo = db.Column(db.Integer, primary_key=True)
+    tipo = db.Column(db.String(100), unique=True, nullable=False)
+    modelos = db.relationship('Modelo', backref='tipo', lazy=True)
+
+class Modelo(db.Model):
+    __tablename__ = 'modelo'
+    id_modelo = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(255), unique=True, nullable=False)
+    imagen = db.Column(db.LargeBinary, nullable=True)
+    id_tipomodelo = db.Column(db.Integer, db.ForeignKey('tipomodelo.id_tipomodelo'), nullable=False)
+    informacion = db.relationship('Informacion', backref='modelo', uselist=False, lazy=True, cascade="all, delete-orphan")
+
+class Informacion(db.Model):
+    __tablename__ = 'informacion'
+    id_informacion = db.Column(db.Integer, primary_key=True)
+    descripcion = db.Column(db.Text, nullable=False)
+    id_modelo = db.Column(db.Integer, db.ForeignKey('modelo.id_modelo'), unique=True, nullable=False)
+    fuentes = db.relationship('FuentesInformacion', backref='informacion', lazy=True, cascade="all, delete-orphan")
+
+class FuentesInformacion(db.Model):
+    __tablename__ = 'fuentes_informacion'
+    id_fuente = db.Column(db.Integer, primary_key=True)
+    url = db.Column(db.Text, nullable=False)
+    id_informacion = db.Column(db.Integer, db.ForeignKey('informacion.id_informacion'), nullable=False)
+    descripcion_link = db.Column(db.String(255), nullable=True)
+#------------------------------------------
 
 @app.route("/")
 def home():
     return render_template("index.html")
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 @app.route('/MlCasoDeUsoSupervisado')
 def MlCaso():
@@ -39,24 +79,87 @@ def map():
     return render_template('mapa.html')
 
 #SEMANA 7
-@app.route("/RL")
+# --- FUNCIÓN AUXILIAR ---
+def obtener_datos_modelo(id_modelo_buscar):
+    """Consulta la BD y devuelve el objeto Modelo con sus relaciones."""
+    try:
+        modelo = Modelo.query.options(
+            db.joinedload(Modelo.tipo),
+            db.joinedload(Modelo.informacion).joinedload(Informacion.fuentes)
+        ).get_or_404(id_modelo_buscar) # get_or_404 es más directo que filter_by + first_or_404 para PK
+        return modelo
+    except Exception as e:
+        print(f"Error al consultar el modelo ID {id_modelo_buscar}: {e}")
+        return None 
+#------------------------------------------
+# --- RUTAS PARA CADA TIPO DE MODELO ---    
+@app.route("/RL") # Ruta para Regresión Logística
 def rl():
-    return render_template("S7/RegresionLogistica.html")
-@app.route("/KNN")
+    modelo_datos = obtener_datos_modelo(id_modelo_buscar=7) # <- ID de Regresión Logística
+    if modelo_datos is None:
+         return "Error al cargar la información del modelo.", 500
+    return render_template("S7/detallesModelo.html", modelo=modelo_datos)
+
+@app.route("/KNN") # Ruta para KNN
 def knn():
-    return render_template("S7/KNN.html")
-@app.route("/Arbol")
+    modelo_datos = obtener_datos_modelo(id_modelo_buscar=6) # <- ID de KNN 
+    if modelo_datos is None:
+         return "Error al cargar la información del modelo.", 500
+    return render_template("S7/detallesModelo.html", modelo=modelo_datos)
+
+@app.route("/Arbol") # Ruta para Árboles de Decisión
 def arbol():
-    return render_template("S7/ArbolesDecision.html")
-@app.route("/RF")
+    modelo_datos = obtener_datos_modelo(id_modelo_buscar=5) # <- ID de Árboles 
+    if modelo_datos is None:
+         return "Error al cargar la información del modelo.", 500
+    return render_template("S7/detallesModelo.html", modelo=modelo_datos)
+
+@app.route("/RF") # Ruta para Random Forest
 def rf():
-    return render_template("S7/RandomForest.html")
-@app.route("/SVM")
+    modelo_datos = obtener_datos_modelo(id_modelo_buscar=4) # <- ID de Random Forest 
+    if modelo_datos is None:
+         return "Error al cargar la información del modelo.", 500
+    return render_template("S7/detallesModelo.html", modelo=modelo_datos)
+
+@app.route("/SVM") # Ruta para SVM
 def svm():
-    return render_template("S7/SVM.html")
-@app.route("/GB")
+    modelo_datos = obtener_datos_modelo(id_modelo_buscar=3) # <- ID de SVM
+    if modelo_datos is None:
+         return "Error al cargar la información del modelo.", 500
+    return render_template("S7/detallesModelo.html", modelo=modelo_datos)
+
+@app.route("/GB") # Ruta para Gradient Boosting
 def gb():
-    return render_template("S7/GradientBoosting.html")
-@app.route("/NB")
+    modelo_datos = obtener_datos_modelo(id_modelo_buscar=2) # <- ID de GB 
+    if modelo_datos is None:
+         return "Error al cargar la información del modelo.", 500
+    return render_template("S7/detallesModelo.html", modelo=modelo_datos)
+
+@app.route("/NB") # Ruta para Naive Bayes
 def nb():
-    return render_template("S7/NaiveBayes.html")
+    modelo_datos = obtener_datos_modelo(id_modelo_buscar=1) # <- ID de Naive Bayes 
+    if modelo_datos is None:
+         return "Error al cargar la información del modelo.", 500
+    return render_template("S7/detallesModelo.html", modelo=modelo_datos)
+
+
+# --- RUTA PARA SERVIR IMÁGENES ---
+@app.route('/modelo/<int:id_modelo>/imagen')
+def servir_imagen(id_modelo):
+    modelo = Modelo.query.get_or_404(id_modelo)
+    if modelo.imagen:
+        mimetype = 'application/octet-stream' # O intenta ser más específico
+        # Ejemplo simple para tipos comunes (requiere instalar 'python-magic' o similar para detección real)
+        # if b'\x89PNG' in modelo.imagen[:8]: mimetype = 'image/png'
+        # elif b'\xFF\xD8\xFF' in modelo.imagen[:3]: mimetype = 'image/jpeg'
+        # elif b'GIF8' in modelo.imagen[:4]: mimetype = 'image/gif'
+        return Response(modelo.imagen, mimetype=mimetype)
+    else:
+         return "No hay imagen disponible", 404
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+    
+    
+    

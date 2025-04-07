@@ -1,0 +1,73 @@
+{% extends "base.html" %} {# Hereda de tu plantilla base #}
+
+{% block title %}{{ modelo.nombre }}{% endblock %} {# Título de la pestaña del navegador #}
+
+{% block content %}
+{# Cabecera dinámica #}
+<header class="text-center bg-warning text-white p-4 shadow-lg mb-4">
+    <h1 class="fw-bold">{{ modelo.nombre }}</h1>
+</header>
+
+<div class="container">
+    <div class="d-flex justify-content-center">
+        {# La tarjeta que mostrará la información #}
+        <div class="card shadow-sm" style="width: 30rem;"> {# Ajusta el ancho si es necesario #}
+
+            {# Mostrar la imagen si existe, usando la ruta 'servir_imagen' #}
+            {% if modelo.imagen %}
+                <img src="{{ url_for('servir_imagen', id_modelo=modelo.id_modelo) }}"
+                     class="card-img-top p-3 mx-auto d-block" {# Centrar y añadir padding #}
+                     style="max-height: 300px; width: auto;" {# Limitar altura y ajustar ancho #}
+                     alt="Imagen de {{ modelo.nombre }}"
+                     {# Opcional: Muestra placeholder si la imagen no carga #}
+                     onerror="this.style.display='none'; this.onerror=null;">
+                     {# O podrías reemplazarla por una imagen placeholder:
+                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/placeholder.png') }}';"
+                     #}
+            {% else %}
+                {# Mostrar un placeholder si no hay imagen en la BD #}
+                {# <img src="{{ url_for('static', filename='images/placeholder.png') }}" class="card-img-top p-3 mx-auto d-block" style="max-height: 200px; width: auto;" alt="Imagen no disponible"> #}
+                <p class="text-center p-3 text-muted">(Imagen no disponible)</p>
+            {% endif %}
+
+            <div class="card-body">
+                {# Nombre del modelo como título de la tarjeta #}
+                <h5 class="card-title">{{ modelo.nombre }}</h5>
+
+                {# Mostrar la descripción si existe #}
+                {% if modelo.informacion and modelo.informacion.descripcion %}
+                    <p class="card-text">
+                        {# nl2br convierte saltos de línea (\n) en <br> HTML #}
+                        {{ modelo.informacion.descripcion}}
+                    </p>
+                {% else %}
+                    <p class="card-text text-muted">Descripción no disponible.</p>
+                {% endif %}
+
+                {# Mostrar las fuentes si existen #}
+                {% if modelo.informacion and modelo.informacion.fuentes %}
+                    <hr> {# Separador visual #}
+                    <h6>Fuentes de Información:</h6>
+                    <ul class="list-unstyled small">
+                        {# Iterar sobre cada fuente asociada a la información #}
+                        {% for fuente in modelo.informacion.fuentes %}
+                            <li>
+                                {# Crear un enlace a la URL #}
+                                <a href="{{ fuente.url }}" target="_blank" rel="noopener noreferrer">
+                                    {# Mostrar la descripción del link si existe, sino la URL #}
+                                    {{ fuente.descripcion_link or fuente.url }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {# Puedes quitar o modificar este botón si quieres #}
+                {# <a href="#" class="btn btn-primary mt-2">Go somewhere</a> #}
+
+            </div> {# Fin card-body #}
+        </div> {# Fin card #}
+    </div> {# Fin d-flex #}
+</div> {# Fin container #}
+
+{% endblock %} {# Fin del bloque de contenido #}
