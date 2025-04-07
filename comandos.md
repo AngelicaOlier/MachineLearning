@@ -20,3 +20,10 @@ git add // todos los cambios los selecciona y los daja listos
 
 git commit -m "comentario"
 ```
+
+merge rama con main
+
+git pull origin main
+cambio a main
+git merge nombre rama
+git push
