@@ -168,7 +168,7 @@ def nb():
     return render_template("S7/detallesModelo.html", modelo=modelo_datos)
 
 
-# --- RUTA PARA SERVIR IMÁGENES ---
+# --- RUTA PARA IMÁGENES ---
 @app.route('/modelo/<int:id_modelo>/imagen')
 def servir_imagen(id_modelo):
     modelo = Modelo.query.get_or_404(id_modelo)
@@ -184,7 +184,4 @@ def servir_imagen(id_modelo):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
-    
-    
-    
+    app.run(debug=True)  
