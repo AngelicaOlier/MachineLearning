@@ -12,9 +12,8 @@ app = Flask(__name__)
 #------------------------------------------
 # --- CONFIGURACIÓN DE LA BASE DE DATOS ---
 DATABASE_URL = (
-    f"{os.getenv('BASE_DE_DATOS')}://{os.getenv('USUARIO_BD')}:"
-    f"{os.getenv('CONTRASENA_BD')}@{os.getenv('HOST_BD')}:"
-    f"{os.getenv('PUERTO_BD')}/{os.getenv('NOMBRE_BD')}"
+    f"postgresql://{os.getenv('USUARIO_BD')}:{os.getenv('CONTRASENA_BD')}"
+    f"@{os.getenv('HOST_BD')}:{os.getenv('PUERTO_BD')}/{os.getenv('NOMBRE_BD')}"
 )
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
