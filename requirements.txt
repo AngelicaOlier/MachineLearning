@@ -8,6 +8,6 @@ psycopg2-binary
 Flask-SQLAlchemy
 Flask-Migrate
 dotenv
-openpyxl# Necesario para leer archivos .xlsx con pandas
-joblib # Para guardar el modelo
-seaborn# Para una mejor visualización de la matriz de confusión
+openpyxl  # Necesario para leer archivos .xlsx con pandas
+joblib    # Para guardar el modelo
+seaborn   # Para una mejor visualización de la matriz de confusión
