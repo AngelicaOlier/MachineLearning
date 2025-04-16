@@ -1,14 +1,15 @@
 #pip install -r requirements.txt
 #flask --app app run --debug
-
 from flask import render_template, request, Response # se añade Response para las imagenes
 from sqlalchemy import text
 from conexionDB import app,session,db
+from MLClasificacionCultivo import entrenar_evaluar_modelo_cultivo 
 import RL_SalarioExperiencia
 import RLg_SectorAutomotriz
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 #------------------------------------------
 @app.route("/conexion_mysql")
@@ -183,5 +184,48 @@ def servir_imagen(id_modelo):
          return "No hay imagen disponible", 404
 
 
+#SEMANA 8 -- ENTRENAR Y EVALUAR EL MODELO DE CULTIVO -- 
+@app.route("/MLClasificacionCultivo", methods=["GET", "POST"])
+def MLClasificacionCultivo():
+    results_data = None
+    error_message = None
+    if request.method == "POST":
+        # Verificar si se incluyó el archivo en la solicitud
+        if 'file' not in request.files:
+            error_message = "No se seleccionó ningún archivo."
+            # No es necesario renderizar aquí si el 'required' del input funciona,
+            # pero es una buena validación del lado del servidor.
+            return render_template("MLClasificacionCultivo.html", error=error_message)
+
+        file = request.files["file"]
+
+        # Verificar si el nombre del archivo está vacío (el usuario no seleccionó nada)
+        if file.filename == '':
+            error_message = "No se seleccionó ningún archivo."
+            return render_template("MLClasificacionCultivo.html", error=error_message)
+
+        # Verificar si el archivo existe y tiene la extensión correcta
+        if file and (file.filename.endswith('.xlsx') or file.filename.endswith('.xls')):
+            try:
+                # Llamar a la función que ahora entrena, evalúa y guarda
+                results_data = entrenar_evaluar_modelo_cultivo(file)
+            except Exception as e:
+                # Capturar errores de la función de procesamiento
+                error_message = str(e)
+        else:
+            error_message = "Formato de archivo no válido. Por favor, suba un archivo .xlsx o .xls."
+
+    # Renderizar la plantilla, pasando los resultados o el error
+    return render_template("MLClasificacionCultivo.html",
+                           results_data=results_data,
+                           error=error_message)
+
+
+# siempre al final del archivo
 if __name__ == '__main__':
-    app.run(debug=True)  
+    # Asegúrate de que el directorio 'saved_models_es' exista antes de iniciar la app
+    # (aunque entrenar_evaluar_modelo_cultivo también lo crea)
+    model_dir_es = "saved_models_es" # Usa la misma variable que en MLClasificacionCultivo.py
+    if not os.path.exists(model_dir_es):
+        os.makedirs(model_dir_es)
+    app.run(debug=True) # debug=True es útil durante el desarrollo

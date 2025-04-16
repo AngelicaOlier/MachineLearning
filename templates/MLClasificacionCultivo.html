@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Entrenamiento Clasificación de Cultivos{% endblock %}
+
+{% block content %}
+<div>
+    <header class="text-center bg-primary text-white p-4 shadow-lg mb-5">
+        <h1 class="fw-bold">Entrenamiento y Evaluación: Clasificación de Cultivos con AdaBoost</h1>
+        <p class="fs-5">Sube un archivo Excel para entrenar, evaluar y guardar el modelo.</p>
+    </header>
+
+    <div class="container mt-4 d-flex justify-content-center">
+        <div class="card shadow-lg p-4 rounded-3" style="max-width: 900px; width: 100%;">
+            <div class="card-body">
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Error</h4>
+                    <p>{{ error }}</p>
+                    <hr>
+                    <p class="mb-0">Por favor, verifica el archivo o inténtalo de nuevo.</p>
+                </div>
+                {% endif %}
+
+                <form method="post" enctype="multipart/form-data">
+                    <div class="mb-4">
+                        <h4 class="text-center mb-3">Cargar Dataset de Cultivos</h4>
+                        <p class="text-muted">El archivo Excel (.xlsx o .xls) debe contener las columnas: <strong>tipo_suelo</strong>, <strong>humedad</strong>, <strong>temperatura</strong> y <strong>cultivo</strong> (la etiqueta real).</p>
+                        <div class="mb-3">
+                            <label for="file" class="form-label fw-bold">Seleccionar archivo Excel:</label>
+                            <input type="file" name="file" id="file" class="form-control" accept=".xlsx, .xls" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 btn-lg">Entrenar y Evaluar Modelo</button>
+                </form>
+
+                {% if results_data %}
+                <div class="mt-5 border-top pt-4">
+                    <h4 class="text-center mb-4 text-success">Resultados de la Evaluación del Modelo</h4>
+                     <div class="alert alert-success" role="alert">
+                        {{ results_data.message }}
+                    </div>
+                    <h5>Resumen del Proceso:</h5>
+                    <ul>
+                        <li>Muestras de Entrenamiento: {{ results_data.num_train_samples }}</li>
+                        <li>Muestras de Prueba: {{ results_data.num_test_samples }}</li>
+                        <li>Modelo guardado en: <code>{{ results_data.model_path }}</code></li>
+                        <li>Preprocesadores guardados en el mismo directorio.</li>
+                    </ul>
+                    <h5 class="mt-4">Métricas de Evaluación (sobre el conjunto de prueba):</h5>
+                     <div class="row text-center mb-4">
+                         <div class="col-md-4">
+                             <div class="card bg-light"> <div class="card-body"> <h6 class="card-title">Exactitud (Accuracy)</h6> <p class="card-text fs-4 fw-bold">{{ results_data.accuracy }}</p> </div> </div>
+                         </div>
+                         <div class="col-md-4">
+                              <div class="card bg-light"> <div class="card-body"> <h6 class="card-title">Precisión (Ponderada)</h6> <p class="card-text fs-4 fw-bold">{{ results_data.precision }}</p> </div> </div>
+                         </div>
+                         <div class="col-md-4">
+                              <div class="card bg-light"> <div class="card-body"> <h6 class="card-title">Recall (Ponderado)</h6> <p class="card-text fs-4 fw-bold">{{ results_data.recall }}</p> </div> </div>
+                         </div>
+                     </div>
+                    <div class="text-center mb-4">
+                        <h5 class="mt-4">Matriz de Confusión</h5>
+                        <p class="text-muted">(Muestra cómo se clasificaron las muestras del conjunto de prueba)</p>
+                        <img src="{{ results_data.confusion_matrix_plot }}" alt="Matriz de Confusión" class="img-fluid mt-2 border rounded">
+                    </div>
+                     <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h6>Distribución Real (Conjunto de Prueba):</h6>
+                            <ul class="list-group">
+                                {% for class, count in results_data.class_distribution_test.items() %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center"> {{ class | title }} <span class="badge bg-secondary rounded-pill">{{ count }}</span> </li>
+                                {% else %} <li class="list-group-item">No hay datos de prueba.</li> {% endfor %}
+                            </ul>
+                        </div>
+                         <div class="col-md-6">
+                            <h6>Distribución Predicha (Conjunto de Prueba):</h6>
+                             <ul class="list-group">
+                                {% for class, count in results_data.predicted_distribution_test.items() %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center"> {{ class | title }} <span class="badge bg-info rounded-pill">{{ count }}</span> </li>
+                                {% else %} <li class="list-group-item">No se realizaron predicciones.</li> {% endfor %}
+                             </ul>
+                        </div>
+                     </div>
+
+                    {# --- Bloque para el botón de descarga --- #}
+                    <div class="text-center mt-5">
+                        <h5>Descargar Resultados</h5>
+                        <p class="text-muted">Descarga un archivo Excel con las predicciones para el conjunto de prueba.</p>
+                        <a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{{ results_data.excel_output_base64 }}"
+                           download="resultados_prediccion_cultivos.xlsx"
+                           class="btn btn-success btn-lg">
+                           <i class="bi bi-download me-2"></i>Descargar Excel
+                        </a>
+                        {# Puedes añadir un icono si usas Bootstrap Icons, por ejemplo: <i class="bi bi-download me-2"></i> #}
+                    </div>
+                    {# --- Fin del bloque de descarga --- #}
+
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
